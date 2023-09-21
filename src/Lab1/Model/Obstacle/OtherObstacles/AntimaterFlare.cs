@@ -2,5 +2,9 @@
 
 internal class AntimaterFlare : ObstacleBase
 {
-    public AntimaterFlare() { }
+    public AntimaterFlare(int amount)
+    {
+        Damage = 0;
+        Amount = amount;
+    }
 }
