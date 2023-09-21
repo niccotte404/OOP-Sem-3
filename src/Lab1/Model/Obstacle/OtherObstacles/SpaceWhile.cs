@@ -5,5 +5,6 @@ internal class SpaceWhile : ObstacleBase
     {
         Damage = int.MaxValue;
         Amount = amount;
+        Size = 1;
     }
 }

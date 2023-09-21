@@ -4,11 +4,12 @@ using Itmo.ObjectOrientedProgramming.Lab1.Service.Validation;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.ImpulseEngine;
 internal class ClassE : ImpulseEngineBase
 {
-    public ClassE(int pathLength, double fuelAmount = 70)
+    public ClassE(int pathLength, bool antinitrinRadiation, double fuelAmount = 70)
     {
         FuelLimit = 70;
         FuelConsumption = 2;
         StartVelocity = 10;
+        AntinitrinRadiation = antinitrinRadiation;
         Time = CountPathTime(pathLength);
         if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
     }

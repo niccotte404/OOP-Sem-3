@@ -3,6 +3,7 @@ internal abstract class EngineBase
 {
     public double FuelConsumption { get; init; }
     public double FuelAmount { get; init; }
+    public bool AntinitrinRadiation { get; init; }
     protected double FuelLimit { get; set; }
     protected int Time { get; set; }
     public bool IsFuelEnough()

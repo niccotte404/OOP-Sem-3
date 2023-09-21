@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Service.Validation;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector;
 internal abstract class DeflectorBase : IDeflector
@@ -7,16 +7,18 @@ internal abstract class DeflectorBase : IDeflector
     protected int HitPoints { get; set; }
     protected bool SetDeflector { get; set; }
 
-    public void GetDamage<TObstacle>(TObstacle obstacle)
+    public void GetDamage(ObstacleBase obstacle)
     {
-        HitPoints -= DeflectorValidation.GetObstacle(obstacle);
+        HitPoints -= obstacle.Damage;
     }
 
     public bool IsDeflectorSet()
     {
+        bool isHitPointsExists = HitPoints > 0;
+
         if (SetDeflector)
         {
-            if (DeflectorValidation.IsDeflectorActive(HitPoints) == false)
+            if (isHitPointsExists == false)
             {
                 return false;
             }

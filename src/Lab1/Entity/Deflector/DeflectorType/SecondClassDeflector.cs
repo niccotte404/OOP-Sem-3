@@ -1,7 +1,7 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector.DeflectorType;
-internal class ThirdClass : DeflectorBase
+internal class SecondClassDeflector : DeflectorBase
 {
-    public ThirdClass(bool setDeflector, bool setPhotonDeflector, int hitPoints)
+    public SecondClassDeflector(bool setDeflector, bool setPhotonDeflector, int hitPoints)
     {
         SetDeflector = setDeflector;
         IsPhotonDeflectorSet = setPhotonDeflector;
