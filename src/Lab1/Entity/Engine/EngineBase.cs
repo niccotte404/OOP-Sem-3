@@ -1,7 +1,7 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine;
 internal abstract class EngineBase
 {
-    public double FuelConsumption { get; init; }
+    public double FuelConsumption { get; set; }
     public double FuelAmount { get; init; }
     public bool AntinitrinRadiation { get; init; }
     protected double FuelLimit { get; set; }

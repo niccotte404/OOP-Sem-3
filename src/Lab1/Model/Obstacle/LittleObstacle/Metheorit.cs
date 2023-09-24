@@ -2,9 +2,5 @@
 internal class Metheorit : LittleObstacleBase
 {
     public Metheorit(int size, int damage, int amount = 0)
-    {
-        Size = size;
-        Damage = damage;
-        Amount = amount;
-    }
+        : base(size, damage, amount) { }
 }

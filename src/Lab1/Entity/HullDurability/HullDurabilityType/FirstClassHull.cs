@@ -1,9 +1,9 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability.HullDurabilityType;
 internal class FirstClassHull : HullDurabilityBase
 {
-    public FirstClassHull(int hitPoints, int size)
+    public FirstClassHull(int size)
+        : base(size, 1, 0)
     {
-        HitPoints = hitPoints;
-        Size = size;
+        IsHullSmallSize = true;
     }
 }

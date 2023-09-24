@@ -1,13 +1,9 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Service.Validation;
-
-namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
 internal class Alpha : HyperjumpEngineBase
 {
-    public Alpha(int pathLength, double fuelAmount = 100)
+    public Alpha(int pathLength, int fuelConsumption, double fuelAmount, double fuelLimit)
+        : base(pathLength, fuelAmount, fuelLimit)
     {
-        FuelLimit = 100;
-        Time = CountPathTime(pathLength);
-        FuelConsumption = CountFuelConsumption(5);
-        if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
+        FuelConsumption = fuelConsumption;
     }
 }

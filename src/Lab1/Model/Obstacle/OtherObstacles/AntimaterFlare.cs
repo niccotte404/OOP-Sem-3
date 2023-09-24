@@ -6,6 +6,5 @@ internal class AntimaterFlare : ObstacleBase
     {
         Damage = 0;
         Amount = amount;
-        Size = 1;
     }
 }
