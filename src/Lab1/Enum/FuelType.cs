@@ -1,4 +1,5 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Enum;
-internal enum FuelType
+public enum FuelType
 {
+    None = 0,
 }

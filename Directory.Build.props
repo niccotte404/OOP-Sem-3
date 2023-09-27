@@ -29,7 +29,7 @@
         <PackageReference Include="SourceKit.Analyzers.Properties" />
     </ItemGroup>
 
-    <!-- Make project internal classes visible to test projects with same name -->
+    <!-- Make project public classes visible to test projects with same name -->
     <ItemGroup>
         <InternalsVisibleTo Include="$(AssemblyName).Tests" />
     </ItemGroup>

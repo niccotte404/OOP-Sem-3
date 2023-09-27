@@ -1,4 +1,10 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Space;
-internal abstract class SpaceBase
+public abstract class SpaceBase
 {
+    protected SpaceBase(int length)
+    {
+        Length = length;
+    }
+
+    public int Length { get; init; }
 }

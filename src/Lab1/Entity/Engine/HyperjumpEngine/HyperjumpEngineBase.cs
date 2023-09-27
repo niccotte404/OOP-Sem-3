@@ -2,12 +2,13 @@
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
 
-internal abstract class HyperjumpEngineBase : EngineBase
+public abstract class HyperjumpEngineBase : EngineBase
 {
-    public HyperjumpEngineBase(int pathLength, double fuelAmount, double fuelLimit)
+    protected HyperjumpEngineBase(int pathLength, double fuelAmount, double fuelLimit, int fuelConsumption)
     {
         FuelLimit = fuelLimit;
         Time = CountPathTime(pathLength);
+        FuelConsumption = fuelConsumption;
         if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
     }
 

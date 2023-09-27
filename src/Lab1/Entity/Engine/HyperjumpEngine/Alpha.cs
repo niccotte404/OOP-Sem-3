@@ -1,9 +1,8 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
-internal class Alpha : HyperjumpEngineBase
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Enum;
+
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
+public class Alpha : HyperjumpEngineBase
 {
-    public Alpha(int pathLength, int fuelConsumption, double fuelAmount, double fuelLimit)
-        : base(pathLength, fuelAmount, fuelLimit)
-    {
-        FuelConsumption = fuelConsumption;
-    }
+    public Alpha(int pathLength, double fuelAmount, double fuelLimit)
+        : base(pathLength, fuelAmount, fuelLimit, (int)FuelConsumptionType.Little) { }
 }

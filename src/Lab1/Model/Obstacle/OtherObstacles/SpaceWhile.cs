@@ -1,5 +1,5 @@
 ﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
-internal class SpaceWhile : ObstacleBase
+public class SpaceWhile : ObstacleBase
 {
     public SpaceWhile(int amount, int damage)
     {

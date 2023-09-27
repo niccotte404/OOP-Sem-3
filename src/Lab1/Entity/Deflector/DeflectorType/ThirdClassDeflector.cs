@@ -1,10 +1,14 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector.DeflectorType;
-internal class ThirdClassDeflector : DeflectorBase
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
+
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector.DeflectorType;
+public class ThirdClassDeflector : DeflectorBase
 {
     public ThirdClassDeflector(bool setDeflector, bool setPhotonDeflector)
-        : base(setDeflector, setPhotonDeflector, 40, 10)
+        : base(setDeflector, setPhotonDeflector, 40, 10) { }
+
+    protected override void GetSpaceWhileDamage(ObstacleBase obstacle)
     {
-        // 'cause only this type of deflector can stay alive after getting space while damage
-        IsAliveAfterSpaceWhile = true;
+        if (obstacle is null) return;
+        obstacle.Damage = HitPoints - 1;
     }
 }
