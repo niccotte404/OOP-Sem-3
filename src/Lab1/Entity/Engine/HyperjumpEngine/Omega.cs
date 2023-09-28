@@ -1,11 +1,11 @@
 ﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab1.Enum;
+using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
 public class Omega : HyperjumpEngineBase
 {
-    public Omega(int pathLength, double fuelAmount, double fuelLimit)
-        : base(pathLength, fuelAmount, fuelLimit, OmegaConsumption((int)FuelConsumptionType.Medium)) { }
+    public Omega(double fuelAmount, double fuelLimit, int avalibleJumpAmount)
+        : base(fuelAmount, fuelLimit, OmegaConsumption((int)FuelConsumptionType.Medium), avalibleJumpAmount) { }
 
     private static int OmegaConsumption(int fuelConsumption)
     {

@@ -3,21 +3,20 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.ImpulseEngine;
 public abstract class ImpulseEngineBase : EngineBase
 {
-    protected ImpulseEngineBase(int pathLength, bool antinitrinRatioation, double fuelAmount, double fuelLimit, int fuelConsumprion, int startVelocity)
+    protected ImpulseEngineBase(bool antinitrinRatioation, double fuelAmount, double fuelLimit, int fuelConsumprion, int startVelocity)
     {
-        PathLength = pathLength;
         FuelConsumption = fuelConsumprion;
         StartVelocity = startVelocity;
         FuelLimit = fuelLimit;
         AntinitrinRadiation = antinitrinRatioation;
-        Time = CountPathTime(PathLength);
+        Time = CountPathTime();
         if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
     }
 
     protected double StartVelocity { get; init; }
-    protected int CountPathTime(int pathLength)
+    protected int CountPathTime()
     {
         // вычисление времени по равномерному движению
-        return (int)(pathLength / StartVelocity);
+        return (int)(PathLength / StartVelocity);
     }
 }

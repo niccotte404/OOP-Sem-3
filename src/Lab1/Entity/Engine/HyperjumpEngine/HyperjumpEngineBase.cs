@@ -4,19 +4,17 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
 
 public abstract class HyperjumpEngineBase : EngineBase
 {
-    protected HyperjumpEngineBase(int pathLength, double fuelAmount, double fuelLimit, int fuelConsumption)
+    protected HyperjumpEngineBase(double fuelAmount, double fuelLimit, int fuelConsumption, int avalibleJumpAmount)
     {
         FuelLimit = fuelLimit;
-        Time = CountPathTime(pathLength);
-        FuelConsumption = fuelConsumption;
+        Time = CountPathTime();
+        FuelConsumption = fuelConsumption * avalibleJumpAmount;
         if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
     }
 
-    protected int SubspaceRange { get; init; } = 10; // +-const, т.к. динамически не хочется запариваться и перегружать конструкторы классов движков
-
-    protected int CountPathTime(int pathLength)
+    protected int CountPathTime()
     {
         // количество прыжков
-        return pathLength / SubspaceRange;
+        return PathLength / FuelConsumption;
     }
 }

@@ -6,9 +6,6 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip;
 public abstract class SpaceShipBase
 {
-    protected SpaceShipBase(int pathLength)
-    {
-    }
     public ImpulseEngineBase? ImpulseEngine { get; set; }
     public HyperjumpEngineBase? HyperjumpEngine { get; set; }
     public DeflectorBase? Deflector { get; set; }
