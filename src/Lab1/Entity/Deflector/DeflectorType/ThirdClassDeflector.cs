@@ -3,8 +3,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector.DeflectorType;
 public class ThirdClassDeflector : DeflectorBase
 {
-    public ThirdClassDeflector(bool setDeflector, bool setPhotonDeflector)
-        : base(setDeflector, setPhotonDeflector, 40, 10) { }
+    public ThirdClassDeflector(bool setPhotonDeflector)
+        : base(setPhotonDeflector, 40, 10) { }
 
     protected override void GetSpaceWhileDamage(ObstacleBase obstacle)
     {

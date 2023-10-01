@@ -1,11 +1,11 @@
 ﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum;
+using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Engine.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.ImpulseEngine;
 public class ClassE : ImpulseEngineBase
 {
-    public ClassE(bool antinitrinRadiation, double fuelAmount, double fuelLimit, int startVelocity)
-        : base(antinitrinRadiation, fuelAmount, fuelLimit, (int)FuelConsumptionType.Medium, startVelocity)
+    public ClassE(bool antinitrinRadiation)
+        : base(antinitrinRadiation, (int)FuelConsumptionType.Medium)
     {
         Time = CountPathTime();
     }

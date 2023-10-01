@@ -1,15 +1,14 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Service.Validation;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Engine.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.HyperjumpEngine;
 
 public abstract class HyperjumpEngineBase : EngineBase
 {
-    protected HyperjumpEngineBase(double fuelAmount, double fuelLimit, int fuelConsumption, int avalibleJumpAmount)
+    protected HyperjumpEngineBase(int fuelConsumption, int fuelForOneJump)
     {
-        FuelLimit = fuelLimit;
+        FuelCategory = (int)FuelType.GravityMater;
         Time = CountPathTime();
-        FuelConsumption = fuelConsumption * avalibleJumpAmount;
-        if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
+        FuelConsumption = fuelConsumption * fuelForOneJump;
     }
 
     protected int CountPathTime()

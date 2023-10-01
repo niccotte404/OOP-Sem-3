@@ -1,16 +1,16 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Service.Validation;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Engine;
+using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Engine.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.ImpulseEngine;
 public abstract class ImpulseEngineBase : EngineBase
 {
-    protected ImpulseEngineBase(bool antinitrinRatioation, double fuelAmount, double fuelLimit, int fuelConsumprion, int startVelocity)
+    protected ImpulseEngineBase(bool antinitrinRatioation, int fuelConsumprion)
     {
+        FuelCategory = (int)FuelType.ActivePlazma;
         FuelConsumption = fuelConsumprion;
-        StartVelocity = startVelocity;
-        FuelLimit = fuelLimit;
+        StartVelocity = (int)ImpulseEngineStartVelocity.StandartVelocity;
         AntinitrinRadiation = antinitrinRatioation;
         Time = CountPathTime();
-        if (EngineValidation.IsFuelAmountValid(fuelAmount, FuelLimit)) FuelAmount = fuelAmount;
     }
 
     protected double StartVelocity { get; init; }

@@ -1,9 +1,11 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum;
+
+namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle;
 public abstract class LittleObstacleBase : ObstacleBase
 {
-    protected LittleObstacleBase(int size, int damage, int amount)
+    protected LittleObstacleBase(SizeType size, int damage, int amount)
     {
-        Size = size;
+        Size = (int)size;
         Damage = damage;
         Amount = amount;
     }

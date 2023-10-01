@@ -1,4 +1,5 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Interface;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum;
+using Itmo.ObjectOrientedProgramming.Lab1.Interface;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
@@ -6,9 +7,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability;
 public abstract class HullDurabilityBase : IDefence
 {
-    protected HullDurabilityBase(int size, int asteroidAmount, int metheoritAmount)
+    protected HullDurabilityBase(SizeType size, int asteroidAmount, int metheoritAmount)
     {
-        Size = size;
+        Size = (int)size;
         AsteroidAmount = asteroidAmount;
         MetheoritAmount = metheoritAmount;
         HitPoints = AsteroidAmount * MetheoritAmount;

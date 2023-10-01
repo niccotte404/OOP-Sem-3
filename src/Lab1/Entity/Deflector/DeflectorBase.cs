@@ -6,9 +6,9 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector;
 public abstract class DeflectorBase : IDefence
 {
-    protected DeflectorBase(bool setDeflector, bool setPhotonDeflector, int asteroidAmount, int metheoritAmount)
+    protected DeflectorBase(bool setPhotonDeflector, int asteroidAmount, int metheoritAmount)
     {
-        SetDeflector = setDeflector;
+        SetDeflector = true;
         SetPhotonDeflector = setPhotonDeflector; // 'cause photon deflector is modification of common deflector i used boolean variable for it
         AsteroidAmount = asteroidAmount;
         MetheoritAmount = metheoritAmount;
