@@ -6,10 +6,5 @@ namespace Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;
 public class CommonSpace : SpaceBase
 {
     public CommonSpace(Asteroid asteroid, Metheorit metheorit, int length)
-        : base(length)
-    {
-        Obstacle = new List<ObstacleBase>() { asteroid, metheorit };
-    }
-
-    public IEnumerable<ObstacleBase> Obstacle { get; init; }
+        : base(length, new List<ObstacleBase>() { asteroid, metheorit }) { }
 }
