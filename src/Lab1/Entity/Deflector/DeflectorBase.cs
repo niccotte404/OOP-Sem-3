@@ -1,6 +1,7 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Interface;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Interface;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle.ObstacleWithInheritedDamage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Deflector;
@@ -31,19 +32,22 @@ public abstract class DeflectorBase : IDefence
     private int MetheoritAmount { get; init; }
 
     // get all damage instance 'cause we don't have update method that can get damage by amount each collision
-    public void GetDamage(ObstacleBase obstacle)
+    public void GetDamage(IEnumerable<ObstacleBase> obstacles)
     {
-        if (obstacle is null) return;
+        if (obstacles is null) return;
 
-        SetDamage(obstacle);
+        foreach (ObstacleBase obstacle in obstacles)
+        {
+            SetDamage(obstacle);
 
-        if (obstacle is AntimaterFlare)
-        {
-            PhotonHitPoints -= obstacle.Amount;
-        }
-        else if (obstacle.Amount > 0)
-        {
-            HitPoints -= obstacle.Damage * obstacle.Amount;
+            if (obstacle is AntimaterFlare)
+            {
+                PhotonHitPoints -= obstacle.Amount;
+            }
+            else if (obstacle.Amount > 0)
+            {
+                HitPoints -= obstacle.Damage * obstacle.Amount;
+            }
         }
     }
 
@@ -63,6 +67,12 @@ public abstract class DeflectorBase : IDefence
         }
 
         return false;
+    }
+
+    public bool IsCrewAlive()
+    {
+        if (PhotonHitPoints < 0) return false;
+        return true;
     }
 
     protected virtual void GetSpaceWhileDamage(ObstacleBase obstacle)

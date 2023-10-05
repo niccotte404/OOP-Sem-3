@@ -1,7 +1,8 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum;
+﻿using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Size;
 using Itmo.ObjectOrientedProgramming.Lab1.Interface;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
-using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle.ObstacleWithInheritedDamage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability;
@@ -20,15 +21,18 @@ public abstract class HullDurabilityBase : IDefence
     private int AsteroidAmount { get; init; }
     private int MetheoritAmount { get; init; }
 
-    public void GetDamage(ObstacleBase obstacle)
+    public void GetDamage(IEnumerable<ObstacleBase> obstacles)
     {
-        if (obstacle is null) return;
+        if (obstacles is null) return;
 
-        SetDamage(obstacle);
-
-        if (obstacle is not AntimaterFlare && obstacle.Amount > 0)
+        foreach (ObstacleBase obstacle in obstacles)
         {
-            HitPoints -= obstacle.Damage * (obstacle.Size / Size);
+            SetDamage(obstacle);
+
+            if (obstacle is not AntimaterFlare && obstacle.Amount > 0)
+            {
+                HitPoints -= obstacle.Damage * (obstacle.Size / Size);
+            }
         }
     }
 

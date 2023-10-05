@@ -24,10 +24,7 @@ public abstract class SpaceShipBase
         }
         else
         {
-            foreach (ObstacleBase obstacle in obstacles)
-            {
-                HullDurability.GetDamage(obstacle);
-            }
+            HullDurability.GetDamage(obstacles);
 
             return HullDurability.IsExists();
         }
@@ -36,11 +33,8 @@ public abstract class SpaceShipBase
     private bool IsDeflectorSet(IEnumerable<ObstacleBase> obstacles)
     {
         if (Deflector is null) return false;
-        foreach (ObstacleBase obstacle in obstacles)
-        {
-            Deflector.GetDamage(obstacle);
-        }
 
+        Deflector.GetDamage(obstacles);
         return Deflector.IsExists();
     }
 }

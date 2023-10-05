@@ -18,7 +18,6 @@ public abstract class HyperjumpEngineBase : EngineBase
 
     protected int CountPathTime()
     {
-        // количество прыжков
         return PathLength / FuelConsumption;
     }
 }
