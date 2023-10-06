@@ -1,5 +1,5 @@
 ﻿using System;
-using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Engine.Fuel;
+using Itmo.ObjectOrientedProgramming.Lab1.Data.EnumData.Engine.Fuel;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine.ImpulseEngine;
 public class ClassE : ImpulseEngineBase

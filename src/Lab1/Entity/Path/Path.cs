@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Path;
+using Itmo.ObjectOrientedProgramming.Lab1.Data.EnumData.Path;
 using Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Fuel;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;

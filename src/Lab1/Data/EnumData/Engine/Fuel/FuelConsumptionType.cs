@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Engine.Fuel;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Data.EnumData.Engine.Fuel;
 public enum FuelConsumptionType
 {
     None = 0,

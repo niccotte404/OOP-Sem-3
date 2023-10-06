@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Path;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Data.EnumData.Path;
 public enum PathOutcome
 {
     None,

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.Interface;
+using Itmo.ObjectOrientedProgramming.Lab1.InterfaceProj;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle.ObstacleWithInheritedDamage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;

@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Size;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Data.EnumData.Size;
 public enum SizeType
 {
     None = 0,

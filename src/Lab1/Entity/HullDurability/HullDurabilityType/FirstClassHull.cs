@@ -1,4 +1,4 @@
-﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.Enum.Size;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.Data.EnumData.Size;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Damage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle.ObstacleWithInheritedDamage;
