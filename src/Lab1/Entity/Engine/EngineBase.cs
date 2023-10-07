@@ -7,6 +7,4 @@ public abstract class EngineBase
     public int FuelCategory { get; init; }
     public int Time { get; set; }
     protected int FuelConsumption { get; init; }
-
-    public void GetPath(int pathLength) => PathLength = pathLength;
 }

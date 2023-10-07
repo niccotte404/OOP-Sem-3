@@ -29,14 +29,14 @@ public class Path
     {
         if (ship is null) return PathOutcome.None;
 
-        foreach (PathPart part in _pathParts)
+        foreach (PathPart pathPart in _pathParts)
         {
-            if (ship.IsAlive(part.Space.Obstacles) == false)
+            if (ship.IsAlive(pathPart.Space.Obstacles) == false || pathPart.Space.IsShipSuitable(ship))
             {
                 return PathOutcome.ShipDestroy;
             }
 
-            if (part.Space is HighDestinySpace && (ship.HyperjumpEngine is null || ship.HyperjumpEngine.IsShipLost() == true))
+            if (pathPart.Space is HighDestinySpace && (ship.HyperjumpEngine is null || ship.HyperjumpEngine.IsShipLost() == true))
             {
                 return PathOutcome.ShipLost;
             }
