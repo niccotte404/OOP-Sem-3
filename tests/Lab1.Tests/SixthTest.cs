@@ -14,10 +14,12 @@ public class SixthTest
     private void Test()
     {
         IEnumerable<SpaceShipBase> spaceShips = new List<SpaceShipBase>() { new Shuttle(), new Vaclas(false) };
-        IEnumerable<PathPart> pathParts = new List<PathPart>() { new PathPart(new NitrineParticlesSpace(new SpaceWhile(0)), spaceShips, (int)PathLength.Little) };
+        IEnumerable<PathPart> pathParts = new List<PathPart>() { new PathPart(new NitrineParticlesSpace(new SpaceWhile(1)), spaceShips, (int)PathLength.Little) };
         var path = new Path(pathParts, spaceShips);
         SpaceShipBase? bestShip = path.GetBestShip();
 
+        // Why best ship here should be Vaclas? Accorsing to the coefficient of cost per time
+        // best ship should be shuttle
         Assert.True(bestShip is Vaclas);
     }
 }

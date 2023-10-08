@@ -13,7 +13,8 @@ public abstract class ImpulseEngineBase : EngineBase
         Time = CountPathTime();
     }
 
-    protected double StartVelocity { get; init; }
+    public double StartVelocity { get; protected set; }
+
     protected int CountPathTime()
     {
         // вычисление времени по равномерному движению

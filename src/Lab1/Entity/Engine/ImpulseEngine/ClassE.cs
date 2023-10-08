@@ -7,12 +7,13 @@ public class ClassE : ImpulseEngineBase
     public ClassE(bool antinitrinRadiation)
         : base(antinitrinRadiation, (int)FuelConsumptionType.Medium)
     {
-        Time = CountPathTime();
+        CountClassETime();
     }
 
-    protected new int CountPathTime()
+    protected void CountClassETime()
     {
-        // через дискриминант находится время пути. по равноускоренному движению
-        return (int)((Math.Sqrt((8 * StartVelocity) + (2 * PathLength * Math.Exp(1))) - (2 * StartVelocity)) / (2 * Math.Exp(1)));
+        // find time by accelerate
+        Time = (int)((Math.Sqrt((8 * StartVelocity) + (2 * PathLength * Math.Exp(1))) - (2 * StartVelocity)) / (2 * Math.Exp(1)));
+        StartVelocity = (Time * Math.Exp(1)) - StartVelocity;
     }
 }

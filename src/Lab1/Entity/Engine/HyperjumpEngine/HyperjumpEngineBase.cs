@@ -15,7 +15,6 @@ public abstract class HyperjumpEngineBase : EngineBase
     }
 
     public bool IsShipLost() => _jumpRange - PathLength < 0;
-
     protected int CountPathTime()
     {
         return PathLength;
