@@ -4,23 +4,27 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entity.Path;
 using Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip;
 using Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip.SpaceShipType;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
 public class FirstTest
 {
-    [Fact]
-    private void Test()
+    public static IEnumerable<object[]> GetData()
     {
-        IEnumerable<SpaceShipBase> spaceShips = new List<SpaceShipBase>() { new Shuttle(), new Avgur(false) };
-        var highDestinyPart = new PathPart(new HighDestinySpace(new AntimaterFlare(0)), spaceShips, (int)PathLength.Medium);
-        IEnumerable<PathPart> pathParts = new List<PathPart>() { highDestinyPart };
-        IEnumerable<PathOutcome> expectedOutcomes = new List<PathOutcome>() { PathOutcome.ShipLost, PathOutcome.ShipLost };
+        yield return new object[] { new HighDestinySpace(new AntimaterFlare(0)), (int)PathLength.Medium, new List<SpaceShipBase>() { new Shuttle(), new Avgur(false) }, new List<PathOutcome>() { PathOutcome.ShipLost, PathOutcome.ShipLost } };
+    }
+
+    [Theory]
+    [MemberData(nameof(GetData))]
+    private void Test(SpaceBase space, int pathLength, IEnumerable<SpaceShipBase> spaceShips, IEnumerable<PathOutcome> expectedOutcomes)
+    {
+        IEnumerable<PathPart> pathParts = new List<PathPart>() { new PathPart(space, spaceShips, pathLength) };
 
         var path = new Path(pathParts, spaceShips);
         IReadOnlyCollection<PathOutcome> outcomes = path.PathOutcomes;
 
-        Assert.Equal<PathOutcome>(expectedOutcomes, outcomes);
+        Assert.Equal(expectedOutcomes, outcomes);
     }
 }
