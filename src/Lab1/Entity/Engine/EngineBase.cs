@@ -1,7 +1,9 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine;
+﻿using System;
+
+namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.Engine;
 public abstract class EngineBase
 {
-    public int Fuel => Time * FuelConsumption;
+    public int Fuel => Math.Abs(Time * FuelConsumption);
     public int PathLength { get; set; }
     public bool AntinitrinRadiation { get; init; }
     public int FuelCategory { get; init; }

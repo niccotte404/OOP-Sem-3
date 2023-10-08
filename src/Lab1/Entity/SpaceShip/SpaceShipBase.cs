@@ -20,7 +20,7 @@ public abstract class SpaceShipBase
 
         foreach (ObstacleBase obstacle in obstacles)
         {
-            if (((Deflector is not null && Deflector.IsCrewAlive() == false) || Deflector is null) && obstacle is AntimaterFlare && obstacle.Amount > 0)
+            if (((Deflector is not null && Deflector.IsCrewAlive() == false) || Deflector is null) && obstacle is AntimaterFlare)
             {
                 return false;
             }
