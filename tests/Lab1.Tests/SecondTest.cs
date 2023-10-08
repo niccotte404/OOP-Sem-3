@@ -8,19 +8,18 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
-public class FirstTest
+public class SecondTest
 {
     [Fact]
     private void Test()
     {
-        IEnumerable<SpaceShipBase> spaceShips = new List<SpaceShipBase>() { new Shuttle(), new Avgur(false) };
-        var highDestinyPart = new PathPart(new HighDestinySpace(new AntimaterFlare(0)), spaceShips, (int)PathLength.Medium);
-        IEnumerable<PathPart> pathParts = new List<PathPart>() { highDestinyPart };
-        IEnumerable<PathOutcome> expectedOutcomes = new List<PathOutcome>() { PathOutcome.ShipLost, PathOutcome.ShipLost };
-
+        IEnumerable<SpaceShipBase> spaceShips = new List<SpaceShipBase>() { new Vaclas(false), new Vaclas(true) };
+        IEnumerable<PathPart> pathParts = new List<PathPart>() { new PathPart(new HighDestinySpace(new AntimaterFlare(2)), spaceShips, (int)PathLength.Little) };
         var path = new Path(pathParts, spaceShips);
+
+        IEnumerable<PathOutcome> expectedOutcomes = new List<PathOutcome>() { PathOutcome.PersonelDead, PathOutcome.Success };
         IReadOnlyCollection<PathOutcome> outcomes = path.PathOutcomes;
 
-        Assert.Equal<PathOutcome>(expectedOutcomes, outcomes);
+        Assert.Equal(expectedOutcomes, outcomes);
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab1.InterfaceProj;
+﻿using Itmo.ObjectOrientedProgramming.Lab1.InterfaceProj;
+using Itmo.ObjectOrientedProgramming.Lab1.Model.HitPoints;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle.ObstacleWithInheritedDamage;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
@@ -14,56 +14,49 @@ public abstract class DeflectorBase : IDefence
         AsteroidAmount = asteroidAmount;
         MetheoritAmount = metheoritAmount;
         HitPoints = AsteroidAmount * MetheoritAmount;
-        if (SetPhotonDeflector)
-        {
-            PhotonHitPoints = 3;
-        }
-        else
-        {
-            PhotonHitPoints = 0;
-        }
+        ToSetPhotonDeflector(SetPhotonDeflector);
     }
 
     protected bool SetPhotonDeflector { get; set; }
     protected int HitPoints { get; set; }
     protected int PhotonHitPoints { get; set; }
     protected bool SetDeflector { get; set; }
-    private int AsteroidAmount { get; init; }
-    private int MetheoritAmount { get; init; }
+    protected int AsteroidAmount { get; init; }
+    protected int MetheoritAmount { get; init; }
 
     // get all damage instance 'cause we don't have update method that can get damage by amount each collision
-    public void GetDamage(IEnumerable<ObstacleBase> obstacles)
+    public int GetDamage(ObstacleBase obstacle)
     {
-        if (obstacles is null) return;
+        if (obstacle is null) return 0;
 
-        foreach (ObstacleBase obstacle in obstacles)
+        SetDamage(obstacle);
+
+        for (int i = 1; i < obstacle.Amount + 1; i++)
         {
-            SetDamage(obstacle);
-
             if (obstacle is AntimaterFlare)
             {
-                PhotonHitPoints -= obstacle.Amount;
+                PhotonHitPoints -= 1;
             }
             else if (obstacle.Amount > 0)
             {
-                HitPoints -= obstacle.Damage * obstacle.Amount;
+                HitPoints -= obstacle.Damage;
+            }
+
+            if (HitPoints <= 0)
+            {
+                return obstacle.Amount - i;
             }
         }
+
+        return 0;
     }
 
     // used for validation common deflector and photon deflector hit points
     public bool IsExists()
     {
-        bool isHitPointsExists = HitPoints > 0;
-
         if (SetDeflector)
         {
-            if (isHitPointsExists == false)
-            {
-                return false;
-            }
-
-            return true;
+            return HitPoints > 0;
         }
 
         return false;
@@ -71,20 +64,13 @@ public abstract class DeflectorBase : IDefence
 
     public bool IsCrewAlive()
     {
-        if (PhotonHitPoints < 0) return false;
-        return true;
-    }
-
-    protected virtual void GetSpaceWhileDamage(ObstacleBase obstacle)
-    {
-        if (obstacle is null) return;
-        obstacle.Damage = HitPoints;
+        return PhotonHitPoints >= 0;
     }
 
     // that's strange dependence between obstacle.Damage and deflector/ship
     // anyway damage usually set as a const
     // but there is no choise to set damage in another way in the deflector and hull
-    private void SetDamage(ObstacleBase obstacle)
+    protected virtual void SetDamage(ObstacleBase obstacle)
     {
         if (obstacle is Asteroid)
         {
@@ -96,7 +82,19 @@ public abstract class DeflectorBase : IDefence
         }
         else if (obstacle is SpaceWhile)
         {
-            GetSpaceWhileDamage(obstacle);
+            obstacle.Damage = HitPoints;
+        }
+    }
+
+    private void ToSetPhotonDeflector(bool set)
+    {
+        if (set)
+        {
+            PhotonHitPoints = DeflectorHitPoints.PhotonHitPoints;
+        }
+        else
+        {
+            PhotonHitPoints = DeflectorHitPoints.NonePhotonHitPoints;
         }
     }
 }

@@ -2,6 +2,6 @@
 public abstract class ObstacleBase
 {
     public int Damage { get; set; }
-    public int Amount { get; init; }
+    public int Amount { get; set; }
     public int Size { get; init; }
 }

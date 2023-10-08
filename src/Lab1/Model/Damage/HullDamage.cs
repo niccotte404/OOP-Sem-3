@@ -2,7 +2,7 @@
 public static class HullDamage
 {
     public static int LittleAsteroidDamage { get; } = 1;
-    public static int LittleMetheoritDamage { get; }
+    public static int LittleMetheoritDamage { get; } = 1;
     public static int MediumAsteroidDamage { get; } = 5;
     public static int MediumMetheoritDamage { get; } = 2;
     public static int HugeAsteroidDamage { get; } = 20;

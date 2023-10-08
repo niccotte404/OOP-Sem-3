@@ -7,11 +7,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability.HullDurabilityTy
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip.SpaceShipType;
 public class Stella : SpaceShipBase
 {
-    public Stella()
+    public Stella(bool setPhotonDeflector)
     {
         ImpulseEngine = new ClassC(false);
         HyperjumpEngine = new Omega();
-        Deflector = new FirstClassDeflector(false);
+        Deflector = new FirstClassDeflector(setPhotonDeflector);
         HullDurability = new FirstClassHull(SizeType.Small);
     }
 }

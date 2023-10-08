@@ -7,11 +7,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability.HullDurabilityTy
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip.SpaceShipType;
 public class Vaclas : SpaceShipBase
 {
-    public Vaclas()
+    public Vaclas(bool setPhotonDeflector)
     {
         ImpulseEngine = new ClassE(false);
         HyperjumpEngine = new Gamma();
-        Deflector = new FirstClassDeflector(false);
+        Deflector = new FirstClassDeflector(setPhotonDeflector);
         HullDurability = new SecondClassHull(SizeType.Medium);
     }
 }

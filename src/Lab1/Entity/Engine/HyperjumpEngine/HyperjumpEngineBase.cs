@@ -10,7 +10,7 @@ public abstract class HyperjumpEngineBase : EngineBase
     {
         FuelCategory = (int)FuelType.GravityMater;
         Time = CountPathTime();
-        FuelConsumption = fuelConsumption * (int)jumpRange;
+        FuelConsumption = fuelConsumption;
         _jumpRange = (int)jumpRange;
     }
 
@@ -18,6 +18,6 @@ public abstract class HyperjumpEngineBase : EngineBase
 
     protected int CountPathTime()
     {
-        return PathLength / FuelConsumption;
+        return PathLength;
     }
 }

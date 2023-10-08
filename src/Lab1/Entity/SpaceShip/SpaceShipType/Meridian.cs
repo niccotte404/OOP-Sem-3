@@ -6,11 +6,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability.HullDurabilityTy
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip.SpaceShipType;
 public class Meridian : SpaceShipBase
 {
-    public Meridian()
+    public Meridian(bool setPhotonDeflector)
     {
         ImpulseEngine = new ClassE(true);
         HyperjumpEngine = null;
-        Deflector = new SecondClassDeflector(false);
+        Deflector = new SecondClassDeflector(setPhotonDeflector);
         HullDurability = new SecondClassHull(SizeType.Medium);
     }
 }

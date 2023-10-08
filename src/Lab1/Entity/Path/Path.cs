@@ -25,31 +25,6 @@ public class Path
 
     public IReadOnlyCollection<PathOutcome> PathOutcomes { get; init; }
 
-    public PathOutcome Outcome(SpaceShipBase ship)
-    {
-        if (ship is null) return PathOutcome.None;
-
-        foreach (PathPart pathPart in _pathParts)
-        {
-            if (ship.IsAlive(pathPart.Space.Obstacles) == false || pathPart.Space.IsShipSuitable(ship))
-            {
-                return PathOutcome.ShipDestroy;
-            }
-
-            if (pathPart.Space is HighDestinySpace && (ship.HyperjumpEngine is null || ship.HyperjumpEngine.IsShipLost() == true))
-            {
-                return PathOutcome.ShipLost;
-            }
-
-            if (ship.Deflector is not null && ship.Deflector.IsCrewAlive())
-            {
-                return PathOutcome.PersonelDead;
-            }
-        }
-
-        return PathOutcome.Success;
-    }
-
     public (int SpentTime, int SpentFuel)? GetSuccessData()
     {
         foreach (SpaceShipBase ship in _spaceShips)
@@ -98,11 +73,11 @@ public class Path
             if (spaceShip.ImpulseEngine is null) continue;
             if (spaceShip.HyperjumpEngine is null)
             {
-                score = spaceShip.ImpulseEngine.Fuel * FuelCost.ActivePlasmaCost / spaceShip.ImpulseEngine.Time;
+                score = spaceShip.ImpulseEngine.Fuel * FuelCost.ActivePlasmaCost;
             }
             else
             {
-                score = ((spaceShip.ImpulseEngine.Fuel * FuelCost.ActivePlasmaCost) + (spaceShip.HyperjumpEngine.Fuel * FuelCost.GravityMaterCost)) / spaceShip.ImpulseEngine.Time;
+                score = (spaceShip.ImpulseEngine.Fuel * FuelCost.ActivePlasmaCost) + (spaceShip.HyperjumpEngine.Fuel * FuelCost.GravityMaterCost);
             }
 
             _scores.Add((score, spaceShip));
@@ -120,5 +95,30 @@ public class Path
                 _successfulShips.Add(spaceShip);
             }
         }
+    }
+
+    private PathOutcome Outcome(SpaceShipBase ship)
+    {
+        if (ship is null) return PathOutcome.None;
+
+        foreach (PathPart pathPart in _pathParts)
+        {
+            if (ship.IsAlive(pathPart.Space.Obstacles) == false)
+            {
+                return PathOutcome.ShipDestroy;
+            }
+
+            if (pathPart.Space is HighDestinySpace && (ship.HyperjumpEngine is null || ship.HyperjumpEngine.IsShipLost() == true))
+            {
+                return PathOutcome.ShipLost;
+            }
+
+            if (ship.IsCrewAlive(pathPart.Space.Obstacles) == false)
+            {
+                return PathOutcome.PersonelDead;
+            }
+        }
+
+        return PathOutcome.Success;
     }
 }

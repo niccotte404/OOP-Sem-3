@@ -7,11 +7,11 @@ using Itmo.ObjectOrientedProgramming.Lab1.Entity.HullDurability.HullDurabilityTy
 namespace Itmo.ObjectOrientedProgramming.Lab1.Entity.SpaceShip.SpaceShipType;
 public class Avgur : SpaceShipBase
 {
-    public Avgur()
+    public Avgur(bool setPhotonDeflector)
     {
         ImpulseEngine = new ClassE(false);
         HyperjumpEngine = new Alpha();
-        Deflector = new ThirdClassDeflector(false);
+        Deflector = new ThirdClassDeflector(setPhotonDeflector);
         HullDurability = new ThirdClassHull(SizeType.Large);
     }
 }
