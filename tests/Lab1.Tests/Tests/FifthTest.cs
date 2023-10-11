@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.OtherObstacles;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;
 using Xunit;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 public class FifthTest
 {
     [Fact]

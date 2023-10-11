@@ -7,7 +7,7 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Obstacle.LittleObstacle.Obstacle
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;
 using Xunit;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
+namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
 public class FourthTest
 {
     [Fact]

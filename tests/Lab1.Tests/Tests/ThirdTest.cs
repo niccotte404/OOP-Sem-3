@@ -8,12 +8,12 @@ using Itmo.ObjectOrientedProgramming.Lab1.Model.Space;
 using Itmo.ObjectOrientedProgramming.Lab1.Model.Space.SpaceType;
 using Xunit;
 
-namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
-public class FirstTest
+namespace Itmo.ObjectOrientedProgramming.Lab1.Tests.Tests;
+public class ThirdTest
 {
     public static IEnumerable<object[]> GetData()
     {
-        yield return new object[] { new HighDestinySpace(new AntimaterFlare(0)), (int)PathLength.Medium, new List<SpaceShipBase>() { new Shuttle(), new Avgur(false) }, new List<PathOutcome>() { PathOutcome.ShipLost, PathOutcome.ShipLost } };
+        yield return new object[] { new NitrineParticlesSpace(new SpaceWhile(3)), (int)PathLength.Medium, new List<SpaceShipBase>() { new Vaclas(false), new Avgur(false), new Meridian(false) }, new List<PathOutcome>() { PathOutcome.ShipDestroy, PathOutcome.Success, PathOutcome.Success } };
     }
 
     [Theory]
