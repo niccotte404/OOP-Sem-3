@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <RootNamespace>Itmo.ObjectOrientedProgramming.Lab2</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
       <Folder Include="Services\" />
     </ItemGroup>
 
