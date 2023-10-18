@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents.OnCondition;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 public sealed class GPU
 {
     public int? VideoMemoryAmount { get; set; }

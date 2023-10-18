@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 public sealed class ComputerCase
 {
     public FormFactor? MaxGraphicAdapterFormFactor { get; set; }

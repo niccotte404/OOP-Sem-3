@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Models.NoneRequiredComponents;
-using Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents;
-using Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents.OnCondition;
+﻿using System;
+using System.Collections.Generic;
+using Itmo.ObjectOrientedProgramming.Lab2.Models;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Data;
 public class RepositoryContext
 {
+    private static readonly Lazy<RepositoryContext> LazySingleton = new Lazy<RepositoryContext>(() => new RepositoryContext());
+    public static RepositoryContext Instance { get { return LazySingleton.Value; } }
     public ICollection<Motherboard>? Motherboards { get; }
     public ICollection<CPU>? CPUs { get; }
     public ICollection<PowerUnit>? PowerUnits { get; }

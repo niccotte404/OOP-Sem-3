@@ -2,11 +2,11 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
-using Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents;
+using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class CPURepository : IRepositoryService<CPU>
+public class CPURepository : RepositoryService<CPU>
 {
     private readonly RepositoryContext _context;
     public CPURepository(RepositoryContext context)
@@ -14,70 +14,46 @@ public class CPURepository : IRepositoryService<CPU>
         _context = context;
     }
 
-    public void Add(CPU component)
+    // that's not paradoxal 'cause we use componentHelper as model that has
+    // each params to select main model with (EXAMPLE: socket is not null but other params are)
+    public override IReadOnlyCollection<CPU> SelectComponent(CPU componentHelper)
     {
-        if (_context.CPUs is null) return;
-        _context.CPUs.Add(component);
-    }
-
-    public void Remove(CPU component)
-    {
-        if (_context.CPUs is null) return;
-        _context.CPUs.Remove(component);
-    }
-
-    public bool IsExists(CPU component)
-    {
-        if (_context.CPUs is null) return false;
-        return _context.CPUs.Contains(component);
-    }
-
-    public void Update(CPU oldComponent, CPU newComponent)
-    {
-        if (_context.CPUs is null) return;
-        if (IsExists(oldComponent) == false) return;
-        _context.CPUs.Remove(oldComponent);
-        _context.CPUs.Add(newComponent);
-    }
-
-    public IReadOnlyCollection<CPU> SelectComponent(CPU componentHelper)
-    {
-        IEnumerable<CPU> cpus = new List<CPU>();
-        if (_context.CPUs is null || componentHelper is null) return cpus.ToImmutableList();
+        if (_context.CPUs is null || componentHelper is null) return Enumerable.Empty<CPU>().ToImmutableList();
+        IEnumerable<CPU> cpus = _context.CPUs;
 
         if (componentHelper.CoreFrequency is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.CoreFrequency == componentHelper.CoreFrequency);
+            cpus = cpus.Where(cpu => cpu.CoreFrequency == componentHelper.CoreFrequency);
         }
 
         if (componentHelper.CoreAmount is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.CoreAmount == componentHelper.CoreAmount);
+            cpus = cpus.Where(cpu => cpu.CoreAmount == componentHelper.CoreAmount);
         }
 
         if (componentHelper.Socket is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.Socket == componentHelper.Socket);
+            cpus = cpus.Where(cpu => cpu.Socket == componentHelper.Socket);
         }
 
         if (componentHelper.IGPU is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.IGPU == componentHelper.IGPU);
+            cpus = cpus.Where(cpu => cpu.IGPU == componentHelper.IGPU);
         }
 
         if (componentHelper.SupportedMemoryFrequency is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.SupportedMemoryFrequency == componentHelper.SupportedMemoryFrequency);
+            cpus = cpus.Where(cpu => cpu.SupportedMemoryFrequency == componentHelper.SupportedMemoryFrequency);
         }
 
         if (componentHelper.TDP is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.TDP == componentHelper.TDP);
+            cpus = cpus.Where(cpu => cpu.TDP <= componentHelper.TDP);
         }
 
         if (componentHelper.PowerConsumption is not null)
         {
-            cpus = _context.CPUs.Where(cpu => cpu.PowerConsumption == componentHelper.PowerConsumption);
+            cpus = cpus.Where(cpu => cpu.PowerConsumption <= componentHelper.PowerConsumption);
         }
 
         return cpus.ToImmutableList();

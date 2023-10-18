@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents;
+namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 public sealed class CPUCoolingSystem
 {
     public IEnumerable<string>? SupportedSockets { get; set; }

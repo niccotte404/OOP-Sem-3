@@ -13,7 +13,7 @@ public class FirstTest
 {
     public static IEnumerable<object[]> GetData()
     {
-        yield return new object[] { new HighDestinySpace(new AntimaterFlare(0)), (int)PathLength.Medium, new List<SpaceShipBase>() { new Shuttle(), new Avgur(false) }, new List<PathOutcome>() { PathOutcome.ShipLost, PathOutcome.ShipLost } };
+        yield return new object[] { new HighDestinySpace(new AntimaterFlare(0)), (int)PathLength.Medium, new List<SpaceShipBase>() { new Shuttle(), new Avgur(false) }, new List<PathOutcome>() { PathOutcome.Success, PathOutcome.ShipLost } };
     }
 
     [Theory]

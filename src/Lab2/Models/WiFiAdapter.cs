@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models.NoneRequiredComponents;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 public sealed class WiFiAdapter
 {
     public string? Version { get; set; }

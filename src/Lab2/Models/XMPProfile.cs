@@ -1,4 +1,4 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models.NoneRequiredComponents;
+﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
 public sealed class XMPProfile
 {
     public string? Timing { get; set; }

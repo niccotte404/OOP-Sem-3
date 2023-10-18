@@ -2,68 +2,43 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
-using Itmo.ObjectOrientedProgramming.Lab2.Models.RequiredComponents;
+using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-internal class RAMRepository : IRepositoryService<RAM>
+public class RAMRepository : RepositoryService<RAM>
 {
     private readonly RepositoryContext _context;
-
     public RAMRepository(RepositoryContext context)
     {
         _context = context;
     }
 
-    public void Add(RAM component)
+    // that's not paradoxal 'cause we use componentHelper as model that has
+    // each params to select main model with (EXAMPLE: socket is not null but other params are)
+    public override IReadOnlyCollection<RAM> SelectComponent(RAM componentHelper)
     {
-        if (_context.RAMs is null) return;
-        _context.RAMs.Add(component);
-    }
-
-    public void Remove(RAM component)
-    {
-        if (_context.RAMs is null) return;
-        _context.RAMs.Remove(component);
-    }
-
-    public bool IsExists(RAM component)
-    {
-        if (_context.RAMs is null) return false;
-        return _context.RAMs.Contains(component);
-    }
-
-    public void Update(RAM oldComponent, RAM newComponent)
-    {
-        if (_context.RAMs is null) return;
-        if (IsExists(oldComponent) == false) return;
-        _context.RAMs.Remove(oldComponent);
-        _context.RAMs.Add(newComponent);
-    }
-
-    public IReadOnlyCollection<RAM> SelectComponent(RAM componentHelper)
-    {
-        IEnumerable<RAM> rams = new List<RAM>();
-        if (_context.RAMs is null || componentHelper is null) return rams.ToImmutableList();
+        if (_context.RAMs is null || componentHelper is null) return Enumerable.Empty<RAM>().ToImmutableList();
+        IEnumerable<RAM> rams = _context.RAMs;
 
         if (componentHelper.MemoryAmount is not null)
         {
-            rams = _context.RAMs.Where(ram => ram.MemoryAmount == componentHelper.MemoryAmount);
+            rams = rams.Where(ram => ram.MemoryAmount >= componentHelper.MemoryAmount);
         }
 
         if (componentHelper.MemoryFrequencyAndJEDEC is not null)
         {
-            rams = _context.RAMs.Where(ram => ram.MemoryFrequencyAndJEDEC is not null && ram.MemoryFrequencyAndJEDEC.Intersect(componentHelper.MemoryFrequencyAndJEDEC).Any());
+            rams = rams.Where(ram => ram.MemoryFrequencyAndJEDEC is not null && ram.MemoryFrequencyAndJEDEC.Intersect(componentHelper.MemoryFrequencyAndJEDEC).Any());
         }
 
         if (componentHelper.SupportedXMP is not null)
         {
-            rams = _context.RAMs.Where(ram => ram.SupportedXMP == componentHelper.SupportedXMP);
+            rams = rams.Where(ram => ram.SupportedXMP == componentHelper.SupportedXMP);
         }
 
         if (componentHelper.FormFactor is not null)
         {
-            rams = _context.RAMs.Where(
+            rams = rams.Where(
                 component => component.FormFactor is not null &&
                 component.FormFactor.Width <= componentHelper.FormFactor.Width &&
                 component.FormFactor.Height <= componentHelper.FormFactor.Height &&
@@ -72,12 +47,12 @@ internal class RAMRepository : IRepositoryService<RAM>
 
         if (componentHelper.DDR is not null)
         {
-            rams = _context.RAMs.Where(ram => ram.DDR == componentHelper.DDR);
+            rams = rams.Where(ram => ram.DDR == componentHelper.DDR);
         }
 
         if (componentHelper.PowerConsumption is not null)
         {
-            rams = _context.RAMs.Where(ram => ram.PowerConsumption == componentHelper.PowerConsumption);
+            rams = rams.Where(ram => ram.PowerConsumption <= componentHelper.PowerConsumption);
         }
 
         return rams.ToImmutableList();
