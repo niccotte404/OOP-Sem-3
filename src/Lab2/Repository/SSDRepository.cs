@@ -2,11 +2,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
 using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class SSDRepository : RepositoryService<SSD>
+public class SSDRepository : RepositoryService<SSD, HelperSSD>
 {
     private readonly RepositoryContext _context;
     public SSDRepository(RepositoryContext context)
@@ -14,9 +15,9 @@ public class SSDRepository : RepositoryService<SSD>
         _context = context;
     }
 
-    public override IReadOnlyCollection<SSD> SelectComponent(SSD componentHelper)
+    public override IReadOnlyCollection<SSD> SelectComponent(HelperSSD componentHelper)
     {
-        if (_context.SSDs is null || componentHelper is null) return Enumerable.Empty<SSD>().ToImmutableList();
+        if (componentHelper is null) return Enumerable.Empty<SSD>().ToImmutableList();
         IEnumerable<SSD> ssds = _context.SSDs;
 
         if (componentHelper.ConnectionOption is not null)

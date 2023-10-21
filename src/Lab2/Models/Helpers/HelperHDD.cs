@@ -1,5 +1,5 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
-public sealed class HDD
+﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
+public sealed class HelperHDD
 {
     public int? MemoryAmount { get; set; }
     public int? SpinSpeed { get; set; }

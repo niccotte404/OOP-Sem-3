@@ -2,8 +2,9 @@
 using Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Services;
-public abstract class RepositoryService<TComponent> : IRepositoryService<TComponent>
+public abstract class RepositoryService<TComponent, THelper> : IRepositoryService<TComponent>
     where TComponent : class
+    where THelper : class
 {
     public void Add(ICollection<TComponent> components, TComponent component)
     {
@@ -31,5 +32,5 @@ public abstract class RepositoryService<TComponent> : IRepositoryService<TCompon
         components.Add(newComponent);
     }
 
-    public abstract IReadOnlyCollection<TComponent> SelectComponent(TComponent componentHelper);
+    public abstract IReadOnlyCollection<TComponent> SelectComponent(THelper componentHelper);
 }

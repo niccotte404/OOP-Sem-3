@@ -2,11 +2,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
 using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class GPURepository : RepositoryService<GPU>
+public class GPURepository : RepositoryService<GPU, HelperGPU>
 {
     private readonly RepositoryContext _context;
     public GPURepository(RepositoryContext context)
@@ -14,9 +15,9 @@ public class GPURepository : RepositoryService<GPU>
         _context = context;
     }
 
-    public override IReadOnlyCollection<GPU> SelectComponent(GPU componentHelper)
+    public override IReadOnlyCollection<GPU> SelectComponent(HelperGPU componentHelper)
     {
-        if (_context.GPUs is null || componentHelper is null) return Enumerable.Empty<GPU>().ToImmutableList();
+        if (componentHelper is null) return Enumerable.Empty<GPU>().ToImmutableList();
         IEnumerable<GPU> gpus = _context.GPUs;
 
         if (componentHelper.FormFactor is not null)

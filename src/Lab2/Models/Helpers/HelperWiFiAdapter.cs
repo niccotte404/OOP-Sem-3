@@ -1,5 +1,5 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
-public sealed class WiFiAdapter
+﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
+public sealed class HelperWiFiAdapter
 {
     public string? Version { get; set; }
     public bool? BuiltInBluetoothModule { get; set; }

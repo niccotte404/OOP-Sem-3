@@ -2,11 +2,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
 using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class MotherboardRepository : RepositoryService<Motherboard>
+public class MotherboardRepository : RepositoryService<Motherboard, HelperMotherboard>
 {
     private readonly RepositoryContext _context;
     public MotherboardRepository(RepositoryContext context)
@@ -16,9 +17,9 @@ public class MotherboardRepository : RepositoryService<Motherboard>
 
     // that's not paradoxal 'cause we use componentHelper as model that has
     // each params to select main model with (EXAMPLE: socket is not null but other params are)
-    public override IReadOnlyCollection<Motherboard> SelectComponent(Motherboard componentHelper)
+    public override IReadOnlyCollection<Motherboard> SelectComponent(HelperMotherboard componentHelper)
     {
-        if (_context.Motherboards is null || componentHelper is null) return Enumerable.Empty<Motherboard>().ToImmutableList();
+        if (componentHelper is null) return Enumerable.Empty<Motherboard>().ToImmutableList();
         IEnumerable<Motherboard> motherboard = _context.Motherboards;
 
         if (componentHelper.Socket is not null)
@@ -38,7 +39,9 @@ public class MotherboardRepository : RepositoryService<Motherboard>
 
         if (componentHelper.Chipset is not null)
         {
-            motherboard = motherboard.Where(component => component.Chipset == componentHelper.Chipset);
+            motherboard = motherboard.Where(component => component.Chipset.SupportedMemoryFrequency is not null &&
+                                            component.Chipset.SupportedMemoryFrequency.Intersect(componentHelper.Chipset.SupportedMemoryFrequency).Any() &&
+                                            component.Chipset.SupportXMP == componentHelper.Chipset.SupportXMP);
         }
 
         if (componentHelper.StandartDDR is not null)
@@ -58,11 +61,6 @@ public class MotherboardRepository : RepositoryService<Motherboard>
                 component.FormFactor.Width <= componentHelper.FormFactor.Width &&
                 component.FormFactor.Height <= componentHelper.FormFactor.Height &&
                 component.FormFactor.Depth <= componentHelper.FormFactor.Depth);
-        }
-
-        if (componentHelper.BIOS is not null)
-        {
-            motherboard = motherboard.Where(component => component.BIOS == componentHelper.BIOS);
         }
 
         return motherboard.ToImmutableList();

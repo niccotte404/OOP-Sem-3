@@ -2,11 +2,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
 using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class WiFiAdapterRepository : RepositoryService<WiFiAdapter>
+public class WiFiAdapterRepository : RepositoryService<WiFiAdapter, HelperWiFiAdapter>
 {
     private readonly RepositoryContext _context;
     public WiFiAdapterRepository(RepositoryContext context)
@@ -14,9 +15,9 @@ public class WiFiAdapterRepository : RepositoryService<WiFiAdapter>
         _context = context;
     }
 
-    public override IReadOnlyCollection<WiFiAdapter> SelectComponent(WiFiAdapter componentHelper)
+    public override IReadOnlyCollection<WiFiAdapter> SelectComponent(HelperWiFiAdapter componentHelper)
     {
-        if (_context.WiFiAdapters is null || componentHelper is null) return Enumerable.Empty<WiFiAdapter>().ToImmutableList();
+        if (componentHelper is null) return Enumerable.Empty<WiFiAdapter>().ToImmutableList();
         IEnumerable<WiFiAdapter> wifiAdapters = _context.WiFiAdapters;
 
         if (componentHelper.Version is not null)

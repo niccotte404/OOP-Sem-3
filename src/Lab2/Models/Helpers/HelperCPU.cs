@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
-public sealed class CPU
+namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
+public sealed class HelperCPU
 {
-    public int? CoreFrequency { get; set; }
+    public float? CoreFrequency { get; set; }
     public int? CoreAmount { get; set; }
     public string? Socket { get; set; }
     public bool? IGPU { get; set; }

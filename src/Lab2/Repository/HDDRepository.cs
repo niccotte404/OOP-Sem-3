@@ -2,11 +2,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
 using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class HDDRepository : RepositoryService<HDD>
+public class HDDRepository : RepositoryService<HDD, HelperHDD>
 {
     private readonly RepositoryContext _context;
     public HDDRepository(RepositoryContext context)
@@ -14,9 +15,9 @@ public class HDDRepository : RepositoryService<HDD>
         _context = context;
     }
 
-    public override IReadOnlyCollection<HDD> SelectComponent(HDD componentHelper)
+    public override IReadOnlyCollection<HDD> SelectComponent(HelperHDD componentHelper)
     {
-        if (_context.HDDs is null || componentHelper is null) return Enumerable.Empty<HDD>().ToImmutableList();
+        if (componentHelper is null) return Enumerable.Empty<HDD>().ToImmutableList();
         IEnumerable<HDD> hdds = _context.HDDs;
 
         if (componentHelper.MemoryAmount is not null)

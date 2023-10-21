@@ -1,5 +1,7 @@
-﻿namespace Itmo.ObjectOrientedProgramming.Lab2.Models;
-public sealed class GPU
+﻿using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+
+namespace Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
+public sealed class HelperGPU
 {
     public int? VideoMemoryAmount { get; set; }
     public string? VersionPCI { get; set; }

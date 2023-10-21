@@ -2,11 +2,12 @@
 using System.Collections.Immutable;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab2.Data;
-using Itmo.ObjectOrientedProgramming.Lab2.Models;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
+using Itmo.ObjectOrientedProgramming.Lab2.Models.Helpers;
 using Itmo.ObjectOrientedProgramming.Lab2.Services;
 
 namespace Itmo.ObjectOrientedProgramming.Lab2.Repository;
-public class CPUCoolingSystemRepository : RepositoryService<CPUCoolingSystem>
+public class CPUCoolingSystemRepository : RepositoryService<CPUCoolingSystem, HelperCoolingSystem>
 {
     private readonly RepositoryContext _context;
     public CPUCoolingSystemRepository(RepositoryContext context)
@@ -16,9 +17,9 @@ public class CPUCoolingSystemRepository : RepositoryService<CPUCoolingSystem>
 
     // that's not paradoxal 'cause we use componentHelper as model that has
     // each params to select main model with (EXAMPLE: socket is not null but other params are)
-    public override IReadOnlyCollection<CPUCoolingSystem> SelectComponent(CPUCoolingSystem componentHelper)
+    public override IReadOnlyCollection<CPUCoolingSystem> SelectComponent(HelperCoolingSystem componentHelper)
     {
-        if (_context.CPUCoolingSystems is null || componentHelper is null) return Enumerable.Empty<CPUCoolingSystem>().ToImmutableList();
+        if (componentHelper is null) return Enumerable.Empty<CPUCoolingSystem>().ToImmutableList();
         IEnumerable<CPUCoolingSystem> cpuCoolingSystems = _context.CPUCoolingSystems;
 
         if (componentHelper.SupportedSockets is not null)
