@@ -22,7 +22,8 @@ public class PowerUnitRepository : RepositoryService<PowerUnit, HelperPowerUnit>
 
         if (componentHelper.MaxPower is not null)
         {
-            powerUnits = powerUnits.Where(component => component.MaxPower >= componentHelper.MaxPower && component.MaxPower <= componentHelper.MaxPower * 1.3f);
+            powerUnits = powerUnits.Where(component => component.MaxPower >= componentHelper.MaxPower ||
+            (component.MaxPower <= componentHelper.MaxPower * 1.3 && component.MaxPower > componentHelper.MaxPower));
         }
 
         return powerUnits.ToImmutableList();

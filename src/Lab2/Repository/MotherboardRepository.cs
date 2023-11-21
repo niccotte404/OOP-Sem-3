@@ -39,7 +39,7 @@ public class MotherboardRepository : RepositoryService<Motherboard, HelperMother
 
         if (componentHelper.Chipset is not null)
         {
-            motherboard = motherboard.Where(component => component.Chipset.SupportedMemoryFrequency is not null &&
+            motherboard = motherboard.Where(component => component.Chipset is not null && component.Chipset.SupportedMemoryFrequency is not null &&
                                             component.Chipset.SupportedMemoryFrequency.Intersect(componentHelper.Chipset.SupportedMemoryFrequency).Any() &&
                                             component.Chipset.SupportXMP == componentHelper.Chipset.SupportXMP);
         }

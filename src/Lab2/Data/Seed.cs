@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Itmo.ObjectOrientedProgramming.Lab2.Builders;
+using Itmo.ObjectOrientedProgramming.Lab2.Builders.Compositors;
 using Itmo.ObjectOrientedProgramming.Lab2.Interfaces;
 using Itmo.ObjectOrientedProgramming.Lab2.Models;
 using Itmo.ObjectOrientedProgramming.Lab2.Models.Components;
@@ -27,8 +27,8 @@ public class Seed
     private readonly ICPUBuilder _cpuBuilder;
     private readonly ICPUCoolingSystemBuilder _coolingSystemBuilder;
     private readonly IGPUBuilder _gpuBuilder;
-    private readonly ISSDBuilder _ssdBuilder;
-    private readonly IHDDBuilder _hddBuilder;
+    private readonly IMemoryComponent<SSD> _ssdBuilder;
+    private readonly IMemoryComponent<HDD> _hddBuilder;
     private readonly IComputerCaseBuilder _computerCaseBuilder;
     private readonly IRAMBuilder _ramBuilder;
     private readonly IWiFiBuilder _wifiBuilder;
@@ -58,11 +58,9 @@ public class Seed
         _ramBuilder = new RAMBuilder();
         _wifiBuilder = new WiFiAdaperBuilder();
         _motherboardBuilder = new MotherboardBuilder();
-
-        InitData();
     }
 
-    private void InitData()
+    public void InitData()
     {
         InitCPUs();
         InitCoolingSystems();
@@ -146,6 +144,12 @@ public class Seed
     {
         _coolingSystemRepository.Add(
             _context.CPUCoolingSystems,
+            _coolingSystemBuilder.GetCoolingSystemSockets(new List<string>() { "AM4", "AM5", "LGA 1150", "LGA 1151", "LGA 1155", "LGA 1200", "LGA 1700" })
+                             .GetCoolingSystemTDP(60)
+                             .GetCoolingSystemFormFactor(new FormFactor(125, 155, 96))
+                             .Build());
+        _coolingSystemRepository.Add(
+            _context.CPUCoolingSystems,
             _coolingSystemBuilder.GetCoolingSystemSockets(new List<string>() { "AM2", "AM2+", "AM3", "AM3+", "AM4", "AM5", "FM1", "FM2", "FM2+", "LGA 1150", "LGA 1151", "LGA 1155", "LGA 1200", "LGA 1700", "LGA 2011", "LGA 2011-3", "LGA 2066" })
                              .GetCoolingSystemTDP(260)
                              .GetCoolingSystemFormFactor(new FormFactor(129, 160, 138))
@@ -218,38 +222,38 @@ public class Seed
     {
         _ssdRepository.Add(
             _context.SSDs,
-            _ssdBuilder.GetSsdConnectionOption("SATA")
-                       .GetSsdMemoryAmount(1000)
-                       .GetSsdDatatransferSpeed(560)
-                       .GetSsdPowerConsumprion(4f)
+            _ssdBuilder.GetConnectionOption("SATA")
+                       .GetMemoryAmount(1000)
+                       .GetDatatransferSpeed(560)
+                       .GetPowerConsumprion(4f)
                        .Build());
         _ssdRepository.Add(
             _context.SSDs,
-            _ssdBuilder.GetSsdConnectionOption("SATA")
-                       .GetSsdMemoryAmount(240)
-                       .GetSsdDatatransferSpeed(520)
-                       .GetSsdPowerConsumprion(2f)
+            _ssdBuilder.GetConnectionOption("SATA")
+                       .GetMemoryAmount(240)
+                       .GetDatatransferSpeed(520)
+                       .GetPowerConsumprion(2f)
                        .Build());
         _ssdRepository.Add(
             _context.SSDs,
-            _ssdBuilder.GetSsdConnectionOption("SATA")
-                       .GetSsdMemoryAmount(960)
-                       .GetSsdDatatransferSpeed(550)
-                       .GetSsdPowerConsumprion(4f)
+            _ssdBuilder.GetConnectionOption("SATA")
+                       .GetMemoryAmount(960)
+                       .GetDatatransferSpeed(550)
+                       .GetPowerConsumprion(4f)
                        .Build());
         _ssdRepository.Add(
             _context.SSDs,
-            _ssdBuilder.GetSsdConnectionOption("PCI-E")
-                       .GetSsdMemoryAmount(500)
-                       .GetSsdDatatransferSpeed(3500)
-                       .GetSsdPowerConsumprion(9f)
+            _ssdBuilder.GetConnectionOption("PCI-E")
+                       .GetMemoryAmount(500)
+                       .GetDatatransferSpeed(3500)
+                       .GetPowerConsumprion(9f)
                        .Build());
         _ssdRepository.Add(
             _context.SSDs,
-            _ssdBuilder.GetSsdConnectionOption("PCI-E")
-                       .GetSsdMemoryAmount(1024)
-                       .GetSsdDatatransferSpeed(7000)
-                       .GetSsdPowerConsumprion(6.3f)
+            _ssdBuilder.GetConnectionOption("PCI-E")
+                       .GetMemoryAmount(1024)
+                       .GetDatatransferSpeed(7000)
+                       .GetPowerConsumprion(6.3f)
                        .Build());
     }
 
@@ -257,33 +261,33 @@ public class Seed
     {
         _hddRepository.Add(
             _context.HDDs,
-            _hddBuilder.GetHddMemoryAmount(2000)
-                       .GetHddSpinSpeed(7200)
-                       .GetHddPowerConsumprion(3.7f)
+            _hddBuilder.GetMemoryAmount(2000)
+                       .GetDatatransferSpeed(7200)
+                       .GetPowerConsumprion(3.7f)
                        .Build());
         _hddRepository.Add(
             _context.HDDs,
-            _hddBuilder.GetHddMemoryAmount(4000)
-                       .GetHddSpinSpeed(5400)
-                       .GetHddPowerConsumprion(4.7f)
+            _hddBuilder.GetMemoryAmount(4000)
+                       .GetDatatransferSpeed(5400)
+                       .GetPowerConsumprion(4.7f)
                        .Build());
         _hddRepository.Add(
             _context.HDDs,
-            _hddBuilder.GetHddMemoryAmount(1000)
-                       .GetHddSpinSpeed(7200)
-                       .GetHddPowerConsumprion(6.4f)
+            _hddBuilder.GetMemoryAmount(1000)
+                       .GetDatatransferSpeed(7200)
+                       .GetPowerConsumprion(6.4f)
                        .Build());
         _hddRepository.Add(
             _context.HDDs,
-            _hddBuilder.GetHddMemoryAmount(6000)
-                       .GetHddSpinSpeed(5400)
-                       .GetHddPowerConsumprion(5.3f)
+            _hddBuilder.GetMemoryAmount(6000)
+                       .GetDatatransferSpeed(5400)
+                       .GetPowerConsumprion(5.3f)
                        .Build());
         _hddRepository.Add(
             _context.HDDs,
-            _hddBuilder.GetHddMemoryAmount(18000)
-                       .GetHddSpinSpeed(7200)
-                       .GetHddPowerConsumprion(8.4f)
+            _hddBuilder.GetMemoryAmount(18000)
+                       .GetDatatransferSpeed(7200)
+                       .GetPowerConsumprion(8.4f)
                        .Build());
     }
 
@@ -294,6 +298,12 @@ public class Seed
             _computerCaseBuilder.GetComputerCaseFormFactor(new FormFactor(240, 496, 465))
                                 .GetComputerCaseGPUFormFactor(new FormFactor(140, 70, 390))
                                 .GetComputerCaseMotherboardFormFactor(new FormFactor(250, 50, 310))
+                                .Build());
+        _computerCaseRepository.Add(
+            _context.ComputerCases,
+            _computerCaseBuilder.GetComputerCaseFormFactor(new FormFactor(800, 800, 800))
+                                .GetComputerCaseGPUFormFactor(new FormFactor(450, 200, 500))
+                                .GetComputerCaseMotherboardFormFactor(new FormFactor(500, 500, 500))
                                 .Build());
         _computerCaseRepository.Add(
             _context.ComputerCases,
@@ -345,7 +355,7 @@ public class Seed
         _ramRepository.Add(
             _context.RAMs,
             _ramBuilder.GetRamMemoryAmount(16)
-                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(1066, 1.2f), new FrequensyAndJEDEC(2066, 1.25f), new FrequensyAndJEDEC(3066, 1.3f) })
+                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(3200, 1.2f), new FrequensyAndJEDEC(5600, 1.25f), new FrequensyAndJEDEC(3600, 1.3f) })
                        .GetRamFormFactor(new FormFactor(6, 34, 150))
                        .GetRamDDR("DDR4")
                        .GetRamPowerConsumption(1.35f)
@@ -354,7 +364,7 @@ public class Seed
         _ramRepository.Add(
             _context.RAMs,
             _ramBuilder.GetRamMemoryAmount(16)
-                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(2066, 1.25f), new FrequensyAndJEDEC(3066, 1.3f) })
+                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(2666, 1.25f), new FrequensyAndJEDEC(3600, 1.3f) })
                        .GetRamFormFactor(new FormFactor(6, 35, 150))
                        .GetRamDDR("DDR5")
                        .GetRamPowerConsumption(1.25f)
@@ -363,7 +373,7 @@ public class Seed
         _ramRepository.Add(
             _context.RAMs,
             _ramBuilder.GetRamMemoryAmount(16)
-                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(1066, 1.2f), new FrequensyAndJEDEC(2066, 1.25f) })
+                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(1600, 1.2f), new FrequensyAndJEDEC(2666, 1.25f) })
                        .GetRamFormFactor(new FormFactor(6, 34, 150))
                        .GetRamDDR("DDR4")
                        .GetRamPowerConsumption(1.45f)
@@ -371,7 +381,7 @@ public class Seed
         _ramRepository.Add(
             _context.RAMs,
             _ramBuilder.GetRamMemoryAmount(8)
-                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(1066, 1.2f) })
+                       .GetRamFrequencyAndJEDEC(new List<FrequensyAndJEDEC>() { new FrequensyAndJEDEC(1600, 1.2f) })
                        .GetRamFormFactor(new FormFactor(6, 30, 150))
                        .GetRamDDR("DDR3")
                        .GetRamPowerConsumption(1.1f)

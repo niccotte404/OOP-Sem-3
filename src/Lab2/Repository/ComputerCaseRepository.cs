@@ -24,27 +24,27 @@ public class ComputerCaseRepository : RepositoryService<ComputerCase, HelperComp
         {
             computerCases = computerCases.Where(
                 component => component.MotherboardFormFactor is not null &&
-                component.MotherboardFormFactor.Width <= componentHelper.MotherboardFormFactor.Width &&
-                component.MotherboardFormFactor.Height <= componentHelper.MotherboardFormFactor.Height &&
-                component.MotherboardFormFactor.Depth <= componentHelper.MotherboardFormFactor.Depth);
+                component.MotherboardFormFactor.Width >= componentHelper.MotherboardFormFactor.Width &&
+                component.MotherboardFormFactor.Height >= componentHelper.MotherboardFormFactor.Height &&
+                component.MotherboardFormFactor.Depth >= componentHelper.MotherboardFormFactor.Depth);
         }
 
         if (componentHelper.MaxGPUFormFactor is not null)
         {
             computerCases = computerCases.Where(
                 component => component.MaxGPUFormFactor is not null &&
-                component.MaxGPUFormFactor.Width <= componentHelper.MaxGPUFormFactor.Width &&
-                component.MaxGPUFormFactor.Height <= componentHelper.MaxGPUFormFactor.Height &&
-                component.MaxGPUFormFactor.Depth <= componentHelper.MaxGPUFormFactor.Depth);
+                component.MaxGPUFormFactor.Width >= componentHelper.MaxGPUFormFactor.Width &&
+                component.MaxGPUFormFactor.Height >= componentHelper.MaxGPUFormFactor.Height &&
+                component.MaxGPUFormFactor.Depth >= componentHelper.MaxGPUFormFactor.Depth);
         }
 
         if (componentHelper.FormFactor is not null)
         {
             computerCases = computerCases.Where(
                 component => component.FormFactor is not null &&
-                component.FormFactor.Width <= componentHelper.FormFactor.Width &&
-                component.FormFactor.Height <= componentHelper.FormFactor.Height &&
-                component.FormFactor.Depth <= componentHelper.FormFactor.Depth);
+                component.FormFactor.Width >= componentHelper.FormFactor.Width &&
+                component.FormFactor.Height >= componentHelper.FormFactor.Height &&
+                component.FormFactor.Depth >= componentHelper.FormFactor.Depth);
         }
 
         return computerCases.ToImmutableList();
