@@ -18,9 +18,9 @@ public class Init : SqlMigration
     (
         UserId bigint primary key generated always as identity ,
         UserName text unique ,
-        Pincode int not null ,
-        Balance decimal ,
-        Role UserRole not null
+        Pincode text not null ,
+        Balance int ,
+        Role int not null
     );
 
     create table Admins
@@ -28,7 +28,7 @@ public class Init : SqlMigration
         AdminId bigint primary key generated always as identity ,
         AdminName text unique ,
         Password text not null ,
-        Role UserRole not null
+        Role int not null
     );
 
     create table History

@@ -1,4 +1,5 @@
-﻿using Domain.Data.Enums;
+﻿using System.Globalization;
+using Domain.Data.Enums;
 using Domain.Models;
 using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
@@ -31,7 +32,7 @@ public class UserRepository : IUserDbRepository
         using var command = new NpgsqlCommand(query, connection);
         command.AddParameter("pin", account?.Pincode)
             .AddParameter("userBalance", account?.Balance)
-            .AddParameter("userRole", account?.Role)
+            .AddParameter("userRole", Convert.ToInt32(account?.Role, new NumberFormatInfo()))
             .AddParameter("userName", account?.UserName);
 
         command.ExecuteNonQuery();
@@ -60,11 +61,11 @@ public class UserRepository : IUserDbRepository
             return null;
 
         return new AccountData(
-            userId: reader.GetString(0),
+            userId: $"{reader.GetInt32(0)}",
             userName: userName,
             pincode: reader.GetString(1),
-            balance: reader.GetDecimal(2),
-            role: reader.GetFieldValue<Roles>(3));
+            balance: reader.GetInt32(2),
+            role: (Roles)reader.GetInt32(3));
     }
 
     public AccountData? GetUserDataById(string? userId)
@@ -82,7 +83,7 @@ public class UserRepository : IUserDbRepository
             .GetResult();
 
         using var command = new NpgsqlCommand(query, connection);
-        command.AddParameter("id", userId);
+        command.AddParameter("id", Convert.ToInt32(userId, new NumberFormatInfo()));
 
         using NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -93,8 +94,8 @@ public class UserRepository : IUserDbRepository
             userId: userId,
             userName: reader.GetString(0),
             pincode: reader.GetString(1),
-            balance: reader.GetDecimal(2),
-            role: reader.GetFieldValue<Roles>(3));
+            balance: reader.GetInt32(2),
+            role: (Roles)reader.GetInt32(3));
     }
 
     public void SetBalance(string userId, decimal balance)

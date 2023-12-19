@@ -18,7 +18,9 @@ public class FlagHandler : IParserHandler
                 continue;
             if (args[i].StartsWith('-'))
                 command.FlagAttributes.Add(args[i], args[i + 1]);
+            else i--;
             commandString = commandString.Replace(args[i], string.Empty, StringComparison.OrdinalIgnoreCase).Replace(args[i + 1], string.Empty, StringComparison.OrdinalIgnoreCase).Trim();
+            if (string.IsNullOrEmpty(commandString)) break;
         }
 
         _nextHandler?.Handle(commandString, command);

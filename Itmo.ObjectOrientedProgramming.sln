@@ -35,9 +35,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab5.Tests", "tests\Lab5.Tests\Lab5.Tests.csproj", "{FA627A62-AD7A-4A72-B15C-EC8AEFD206DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Lab5\Application\Application.csproj", "{EBCEFCB5-06CF-44E7-AC19-A24B6A8798B4}"
-	ProjectSection(ProjectDependencies) = postProject
-		{36D3A498-58AD-4AEF-90E0-C4456589453E} = {36D3A498-58AD-4AEF-90E0-C4456589453E}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostgresAdapter", "src\Lab5\PostgresAdapter\PostgresAdapter.csproj", "{2C7D16E7-3FDB-461D-82CC-45E21442FC0D}"
 EndProject

@@ -1,6 +1,8 @@
-﻿using Configurator.Extensions;
+﻿using Application;
+using Configurator.Extensions;
 using Itmo.Dev.Platform.Postgres.Extensions;
 using Microsoft.Extensions.DependencyInjection;
+using Ports.Ports;
 
 var collection = new ServiceCollection();
 
@@ -20,3 +22,13 @@ ServiceProvider provider = collection.BuildServiceProvider();
 using IServiceScope scope = provider.CreateScope();
 
 scope.UsePlatformMigrationsAsync(default).GetAwaiter().GetResult();
+
+while (true)
+{
+    var invoker = new Invoker(
+        provider.GetService<IConsoleService>(),
+        provider.GetService<IUserDbRepository>(),
+        provider.GetService<IAdminDbRepository>(),
+        provider.GetService<IHistoryDbRepository>());
+    invoker.Invoke();
+}

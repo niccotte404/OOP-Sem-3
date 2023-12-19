@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.Globalization;
 using Domain.Models;
 using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
@@ -29,7 +30,7 @@ public class HistoryRepository : IHistoryDbRepository
             .GetResult();
 
         using var command = new NpgsqlCommand(query, connection);
-        command.AddParameter("id", historyData?.UserId)
+        command.AddParameter("id", Convert.ToInt32(historyData?.UserId, new NumberFormatInfo()))
             .AddParameter("message", historyData?.Message);
 
         command.ExecuteNonQuery();
@@ -50,7 +51,7 @@ public class HistoryRepository : IHistoryDbRepository
             .GetResult();
 
         using var command = new NpgsqlCommand(query, connection);
-        command.AddParameter("id", userId);
+        command.AddParameter("id", Convert.ToInt32(userId, new NumberFormatInfo()));
 
         using NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -58,11 +59,12 @@ public class HistoryRepository : IHistoryDbRepository
             return null;
 
         IList<HistoryData> userHistory = new List<HistoryData>();
-        while (reader.Read())
+        while (reader.HasRows)
         {
             userHistory.Add(new HistoryData(
                 userId: userId,
                 message: reader.GetString(0)));
+            if (reader.Read() is false) break;
         }
 
         return userHistory.ToImmutableList();

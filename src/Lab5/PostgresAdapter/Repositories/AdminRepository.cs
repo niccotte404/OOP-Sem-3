@@ -1,4 +1,5 @@
-﻿using Domain.Data.Enums;
+﻿using System.Globalization;
+using Domain.Data.Enums;
 using Domain.Models;
 using Itmo.Dev.Platform.Postgres.Connection;
 using Itmo.Dev.Platform.Postgres.Extensions;
@@ -30,7 +31,7 @@ public class AdminRepository : IAdminDbRepository
 
         using var command = new NpgsqlCommand(query, connection);
         command.AddParameter("adminPassword", admin?.Password)
-            .AddParameter("adminRole", admin?.Role)
+            .AddParameter("adminRole", Convert.ToInt32(admin?.Role, new NumberFormatInfo()))
             .AddParameter("adminName", admin?.UserName);
 
         command.ExecuteNonQuery();
@@ -59,9 +60,9 @@ public class AdminRepository : IAdminDbRepository
             return null;
 
         return new AdminData(
-            userId: reader.GetString(0),
+            userId: $"{reader.GetInt32(0)}",
             userName: adminName,
             password: reader.GetString(1),
-            role: reader.GetFieldValue<Roles>(2));
+            role: (Roles)reader.GetInt32(2));
     }
 }
