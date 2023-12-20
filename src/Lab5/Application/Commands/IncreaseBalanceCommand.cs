@@ -27,6 +27,7 @@ public class IncreaseBalanceCommand : IAppCommand
         if (AppContext.IsLoggedIn is false || AppContext.Role is not Roles.User) return;
         AccountData? currAccount = _userDbRepository?.GetUserDataById(AppContext.Id);
         if (currAccount is null || AppContext.Id is null) return;
+        AppContext.Balance = currAccount.Balance + _increaseBalance;
         _userDbRepository?.SetBalance(AppContext.Id, currAccount.Balance + _increaseBalance);
         _historyDbRepository?.AddHistoryData(new HistoryData(AppContext.Id, "Increase Balance"));
     }

@@ -29,6 +29,7 @@ while (true)
         provider.GetService<IConsoleService>(),
         provider.GetService<IUserDbRepository>(),
         provider.GetService<IAdminDbRepository>(),
-        provider.GetService<IHistoryDbRepository>());
+        provider.GetService<IHistoryDbRepository>(),
+        Console.ReadLine());
     invoker.Invoke();
 }

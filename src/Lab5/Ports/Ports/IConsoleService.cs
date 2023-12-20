@@ -5,5 +5,5 @@ namespace Ports.Ports;
 public interface IConsoleService
 {
     void WriteMassage(string? message);
-    Command GetMessage();
+    Command GetMessage(string? commandString);
 }

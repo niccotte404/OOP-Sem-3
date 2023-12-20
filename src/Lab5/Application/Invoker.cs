@@ -23,13 +23,13 @@ public class Invoker
         ["history"] = () => new HistoryCommand(_historyDbRepository, _consoleService),
     };
 
-    public Invoker(IConsoleService? consoleService, IUserDbRepository? userDbRepository, IAdminDbRepository? adminDbRepository, IHistoryDbRepository? historyDbRepository)
+    public Invoker(IConsoleService? consoleService, IUserDbRepository? userDbRepository, IAdminDbRepository? adminDbRepository, IHistoryDbRepository? historyDbRepository, string? consoleMessage)
     {
         _consoleService = consoleService;
         _userDbRepository = userDbRepository;
         _adminDbRepository = adminDbRepository;
         _historyDbRepository = historyDbRepository;
-        _command = _consoleService?.GetMessage();
+        _command = _consoleService?.GetMessage(consoleMessage);
     }
 
     public void Invoke()

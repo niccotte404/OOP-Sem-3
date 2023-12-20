@@ -10,8 +10,4 @@
       <ProjectReference Include="..\Ports\Ports.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ViewModels\" />
-    </ItemGroup>
-
 </Project>
