@@ -1,0 +1,11 @@
+﻿version: '3.4'
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=app
+      - POSTGRES_DB=mydb
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
