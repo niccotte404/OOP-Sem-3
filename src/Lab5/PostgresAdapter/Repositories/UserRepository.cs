@@ -114,7 +114,7 @@ public class UserRepository : IUserDbRepository
 
         using var command = new NpgsqlCommand(query, connection);
         command.AddParameter("newBalance", balance);
-        command.AddParameter("id", userId);
+        command.AddParameter("id", Convert.ToInt32(userId, new NumberFormatInfo()));
 
         command.ExecuteNonQuery();
     }
